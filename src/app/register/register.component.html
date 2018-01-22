@@ -1,0 +1,74 @@
+<div  class="body-full-height">
+  
+
+  <div class="login-container">
+         <simple-notifications [options]="options"></simple-notifications>
+            <div class="login-box animated fadeInDown">
+                <div class="login-logo"></div>
+                <div class="login-body">
+                    <div class="login-title"><strong>Register</strong> on the XPay Platform</div>
+                    <form #form="ngForm" class="form-horizontal" (ngSubmit)="doRegister()" *ngIf="active" >
+                      
+                    <div class="form-group" [ngClass]="{ 'has-error': firstname.invalid && firstname.touched }">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="register.firstname" type="text" name="firstname" #firstname="ngModel" class="form-control" placeholder="Firstname" required/>
+                            <span class="help-block" *ngIf="firstname.invalid && firstname.touched">Firstname is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': lastname.invalid && lastname.touched }">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="register.lastname" type="text" name="lastname" #lastname="ngModel" class="form-control" placeholder="Lastname" required/>
+                            <span class="help-block" *ngIf="lastname.invalid && lastname.touched">Lastname is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': username.invalid && username.touched }">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="register.username" type="text" name="username" #username="ngModel" class="form-control" placeholder="Username" required/>
+                            <span class="help-block" *ngIf="username.invalid && username.touched">Username is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': email.invalid && email.touched }">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="register.email" type="text" name="email" #email="ngModel" class="form-control" placeholder="Email" required/>
+                            <span class="help-block" *ngIf="email.invalid && email.touched">Email is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': phone.invalid && phone.touched }">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="register.phone" type="text" name="phone" #phone="ngModel" class="form-control" placeholder="Phone Number" required/>
+                            <span class="help-block" *ngIf="phone.invalid && phone.touched">Your Phone Number is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': password.invalid && password.touched }">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="register.password" #password="ngModel" type="password" name="password" class="form-control" placeholder="Password" required/>
+                            <span class="help-block" *ngIf="password.invalid && password.touched">Password is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!--<div class="col-md-6">
+                            <a routerLink="/reset" class="btn btn-link btn-block">Forgot your password?</a>
+                        </div>-->
+                        <div class="col-md-6">
+                            <button  type="submit" [disabled]="form.invalid" class="btn btn-info btn-block">Register</button>
+                        </div>
+                    </div>
+                    <!--<div class="login-subtitle">
+                        Don't have an account yet? <a routerLink="/register">Create an account</a>
+                    </div>-->
+                    </form>
+                </div>
+                <div class="login-footer">
+                    <div class="pull-left">
+                        &copy; 2017 Nigerian Stock Exchange
+                    </div>
+                    <div class="pull-right">
+                        <a href="#">About</a> |
+                        <a href="#">Privacy</a> |
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+</div>

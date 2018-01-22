@@ -1,0 +1,11 @@
+@import "~/assets/css/theme-default.css";
+
+
+
+md-toolbar {   
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10px;
+    padding: 0 0 0 0;
+}
