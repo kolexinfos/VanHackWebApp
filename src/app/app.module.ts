@@ -14,7 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 
-import { AlertService, AuthenticationService } from './_services/index';
+import { AlertService, AuthenticationService, MiscService } from './_services/index';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
@@ -25,6 +25,7 @@ import { AlertComponent } from './_directives/alert.component';
 import { HomeComponent } from './home/home.component';
 import { NewComponent } from './new/new.component';
 import { ThreadComponent } from './thread/thread.component'
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
     AuthGuard,
     AuthenticationService,
     AlertService,
+    MiscService,
     AppConfig,
      { provide: BrowserXhr, useClass: NgProgressBrowserXhr }
   ],
