@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-thread',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThreadComponent implements OnInit {
 
-  constructor() { }
+  postID: number;
+
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.postID = +params['id'];
+    })
+   }
 
   ngOnInit() {
-  }
+    }
 
 }

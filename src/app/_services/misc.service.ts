@@ -11,23 +11,25 @@ import { PostModel } from 'app/_models/PostModel';
 export class MiscService {
 
     token: string;
+    posts: Array<PostModel>;
 
     constructor(private http: Http, private config: AppConfig){
         this.token = localStorage.getItem('token');
     }
 
-    GetPosts(): Observable<PostModel>{
+    GetPosts(): Observable<PostModel[]>{
         const headers = new Headers({ 'Content-Type': 'application/json'});
         const options = new RequestOptions({ headers: headers });
 
         return this.http.get(this.config.apiUrl + '/api/topics', options)
         .map(resp => {
             return resp.json().map(post => {
-                console.log(post);
+                
                 
                 return new PostModel(
+                    post.Id,
                     post.Title,
-                    post.Fulltext,
+                    post.FullText,
                     post.DateCreated,
                     post.Category,
                     post.Username,

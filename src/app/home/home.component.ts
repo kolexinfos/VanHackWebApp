@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MiscService } from 'app/_services/misc.service';
+import { ActivatedRoute } from '@angular/router';
+import { PostModel } from 'app/_models/PostModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +11,22 @@ import { MiscService } from 'app/_services/misc.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public miscService: MiscService) {
-    this.miscService.GetPosts().subscribe( data => {
-      console.log(data);
-    })
+  posts: Array<PostModel>;
+
+  constructor(private route: ActivatedRoute, public miscService: MiscService, public router: Router ) {
    }
 
   ngOnInit() {
+    this.route.data.subscribe((data: { posts: PostModel[] }) => {
+      
+      this.posts = data.posts;
+      this.miscService.posts = data.posts;
+    });
   }
 
-  gotoPage(){
-    console.log('Go To Details Page');
+  openThread(post: PostModel){
+    
+    this.router.navigate(['thread', {id: post.id}])
   }
 
 }

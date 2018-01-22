@@ -3,10 +3,10 @@
 </div>
 <div class="search-results">
 
-    <div class="sr-item">
-        <a href="#" class="sr-item-title">Joli Admin - Responsive Bootstrap Admin Template</a>
+    <div (click)="openThread(post)" *ngFor='let post of posts' class="sr-item">
+        <a href="#" class="sr-item-title">{{post.title}}</a>
         
-        <p>Joli Admin – is a powerful admin template based on Bootstrap 3.2. Template is fully responsive and retina ready. In downloaded package you will find .less files, documentation, clean and commented source code. Joli Admin is easy to use and customize, also you will find lots of ready to use elements.</p>
+        <p class="sr-item-links">{{post.fulltext}}</p>
         <p class="sr-item-links"><a href="#">View the Topic</a> - <a href="#">200 views</a> - <a href="#">Hide this Topic</a></p>
     </div>                                
     
