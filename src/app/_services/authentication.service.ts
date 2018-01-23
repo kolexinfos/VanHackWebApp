@@ -24,17 +24,17 @@ export class AuthenticationService {
 
         return this.http.post(this.config.apiUrl + 'token', 'grant_type=password' + '&username=' + user.username + '&password=' + user.password, options)
             .map(res => {
-                console.log(res.json());
+                console.log(res);
                 let auth = res.json();
+                console.log(auth)
                 return new AuthModel(
                     auth.access_token,
                     auth['.expires'],
+                    auth.username,
+                    auth.userid
                 );
             })
-
     }
-
-
 
     register(register: RegisterModel) {
         return this.http.post(this.config.apiUrl + '/api/account/register', register)
@@ -47,5 +47,7 @@ export class AuthenticationService {
         // remove the user from the localstorage to log user out
         localStorage.removeItem('token');
         localStorage.removeItem('expire');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userid');
     }
 }

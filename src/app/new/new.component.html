@@ -1,3 +1,66 @@
-<p>
-  new works!
-</p>
+<div class="row">
+    
+    <div class="col-md-12">
+
+        <!--<form class="form-horizontal">-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Create a new <strong>Topic</strong></h3>
+                <!--<ul class="panel-controls">
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>-->
+            </div>
+            <div class="panel-body">
+                <p>Add all the <code>relevant information</code> for this topic.</p>
+            </div>
+            <div class="panel-body form-group-separated">
+                <form #form="ngForm" class="form-horizontal" (ngSubmit)="addTopic()">
+
+                    <div class="form-group" [ngClass]="{ 'has-error': title.invalid && title.touched }">
+                        <label class="col-md-3 col-xs-12 control-label">Title</label>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                <input [(ngModel)]="create.title" type="text" name="title" #title="ngModel" type="text" class="form-control" required/>
+                            </div>
+                            
+                            <span class="help-block" *ngIf="title.invalid && title.touched">Please enter the Product Name</span>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': fulltext.invalid && fulltext.touched }">
+                        <label class="col-md-3 col-xs-12 control-label">Full Text</label>
+                        <div class="col-md-6 col-xs-12">
+                            <textarea [(ngModel)]="create.fulltext" type="text" name="fulltext" #fulltext="ngModel" class="form-control" cols="10" rows="5"
+                                required></textarea>
+                            <span class="help-block">Enter information that describes the topic</span>
+                            <span class="help-block" *ngIf="fulltext.invalid && fulltext.touched">Please enter the  full text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-12 control-label">Category</label>
+                        <div class="col-md-6 col-xs-12">
+                            <select class="form-control select" [(ngModel)]="create.categoryid" name="Category">
+                                    <option *ngFor="let category of categories;let itemIndex = index" 
+                                    [ngValue]="category.id" [attr.selected]="itemIndex == 0">{{category.name}}</option>
+                            </select>
+                            <span class="help-block">Select the Category of your topic</span>
+                        </div>
+                    </div>                   
+                   
+
+                    <div class="panel-footer">
+                        <button (click)="clearForm()" class="btn btn-default">Clear Form</button>
+                        <button type="submit"  [disabled]="form.invalid" class="btn btn-primary pull-right">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <!-- <loading-spinner *ngIf="showSpinner"></loading-spinner>  -->
+        <!--</form>-->
+
+    </div>
+</div>
+

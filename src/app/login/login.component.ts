@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
          }
 
   doLogin() {
-      console.log(this.login);
+      
 
       
       this.active = false;
@@ -49,6 +49,8 @@ export class LoginComponent implements OnInit {
 
                     localStorage.setItem('token', data.access_token );
                     localStorage.setItem('expire', data.expirydate);
+                    localStorage.setItem('username', data.username);
+                    localStorage.setItem('userid', data.userid);
 
                     this.notificationsService.success('Notification', 'Successfully Logged In', {
                     timeOut: 3000,

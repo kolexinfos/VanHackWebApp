@@ -14,7 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 
-import { AlertService, AuthenticationService, MiscService, MiscResolve } from './_services/index';
+import { AlertService, AuthenticationService, MiscService, MiscResolve, NewResolve } from './_services/index';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
@@ -30,13 +30,15 @@ import { LogoutComponent } from './logout/logout.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'register', component: RegisterComponent },
+  
+  // { path: 'register', component: RegisterComponent },
+ 
   { path: '', component: MainComponent,
     children : [
       {path: '', component: HomeComponent, resolve: { posts : MiscResolve}},
-      {path: 'new', component: NewComponent},
       {path: 'thread', component: ThreadComponent},
+       { path: 'new', canActivate: [AuthGuard], component: NewComponent, resolve: {category: NewResolve} },
+       { path: 'logout', component: LogoutComponent },
     ],
   },
   // {path: '**', component: MainComponent},
@@ -74,6 +76,7 @@ const appRoutes: Routes = [
     MiscService,
     MiscResolve,
     AppConfig,
+    NewResolve,
      { provide: BrowserXhr, useClass: NgProgressBrowserXhr }
   ],
   bootstrap: [AppComponent]
