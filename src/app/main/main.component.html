@@ -11,13 +11,16 @@
                     </li>                    
                     <li class="xn-title"></li>
                     <li>
-                        <a [routerLink]="['new']"><span class="fa fa-desktop"></span> <span class="xn-text">New Topic</span></a>
-                    </li>                    
-                    <li>
-                        <a [routerLink]="['login']"><span class="fa fa-desktop"></span> <span class="xn-text">Login</span></a>
+                        <a [routerLink]="['']"><span class="fa fa-home"></span> <span class="xn-text">Home</span></a>
                     </li>
                     <li>
-                        <a [routerLink]="['logout']"><span class="fa fa-desktop"></span> <span class="xn-text">Logout</span></a>
+                        <a [routerLink]="['new']"><span class="fa fa-plus"></span> <span class="xn-text">New Topic</span></a>
+                    </li>                    
+                    <li>
+                        <a *ngIf="!loggedIn" [routerLink]="['login']"><span class="fa fa-sign-in"></span> <span class="xn-text">Login</span></a>
+                    </li>
+                    <li>
+                        <a *ngIf="loggedIn" [routerLink]="['logout']"  ><span class="fa fa-sign-out"></span> <span class="xn-text">Logout</span></a>
                     </li>
                     
                                         

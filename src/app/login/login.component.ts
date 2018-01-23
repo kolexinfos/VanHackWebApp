@@ -5,6 +5,7 @@ import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifi
 import { LoginModel} from '../_models/LoginModel'
 import { AlertService, AuthenticationService } from '../_services/index';
 import 'rxjs/add/operator/map'
+import { AuthModel } from 'app/_models/AuthModel';
 
 @Component({
   selector: 'app-login',
@@ -13,55 +14,55 @@ import 'rxjs/add/operator/map'
 })
 export class LoginComponent implements OnInit {
 
-    showSpinner: boolean = true;
+    
+    
+    active: boolean = true;
+    model: any = {};
+    loading = false;
+    returnUrl: string;
+    login: LoginModel;
+
+    public options = {
+        position: ["top", "left"],
+        timeOut: 0,
+        lastOnBottom: true,
+    };
 
   constructor(private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,private notificationsService: NotificationsService,
-        private alertService: AlertService) { }
-
-        title = 'X-Pay Admin Portal';
-        active: boolean = true;
-        model: any = {};
-        loading = false;
-        returnUrl: string;
-
-        public options = {
-                position: ["top", "left"],
-                timeOut: 0,
-                lastOnBottom: true,
-            };
-
-
-        login: LoginModel = new LoginModel("", "");
+        private alertService: AlertService) {
+            this.login = new LoginModel();
+         }
 
   doLogin() {
       console.log(this.login);
 
-      this.showSpinner = true;
       
       this.active = false;
       setTimeout( () => this.active = true, 0);
 
       this.loading = true;
-        this.authenticationService.login(this.login.email, this.login.password)
+        this.authenticationService.Login(this.login)
             .subscribe(
                 data => {
-                    this.showSpinner = false;
+
+                    localStorage.setItem('token', data.access_token );
+                    localStorage.setItem('expire', data.expirydate);
+
                     this.notificationsService.success('Notification', 'Successfully Logged In', {
                     timeOut: 3000,
                     showProgressBar: true,
                     pauseOnHover: true,
                     clickToClose: true
                     });
-                                    
-                    this.router.navigate([this.returnUrl]); 
-                    
+
+                    this.router.navigate([this.returnUrl]);
+
                 },
                 error => {
-                    this.showSpinner = false;
-                    var body = JSON.parse(error._body);
-                    this.notificationsService.error('Notification', body.Message[0], {
+
+                    this.notificationsService.error('Notification', 'Invalid username and password', {
                     timeOut: 5000,
                     showProgressBar: true,
                     pauseOnHover: true,
@@ -70,7 +71,7 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 });
 
-                this.login.password = "";
+                this.login.password = '';
   }
 
   ngOnInit() {
@@ -78,9 +79,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/main/product';
-
-        this.showSpinner = false;
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
   }
 
 

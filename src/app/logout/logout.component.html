@@ -1,0 +1,26 @@
+<div  class="body-full-height">
+    
+
+  <div class="login-container">
+       
+        
+            <div class="login-box animated fadeInDown">
+                <div class="login-logo"></div>
+                <div class="login-body">
+                    <div class="login-title">You have <strong>Logged Out</strong> successfully.</div>
+                    <div class="col-md-6">
+                      <button (click)="gotoHome()" class="btn btn-info">Home</button>
+                      <button (click)="gotoLogin()" class="btn btn-success">Login</button>
+                  </div>
+                </div>
+                <div class="login-footer">
+                    <div class="pull-left">
+                        &copy; 2018 VanHack Corp.
+                    </div>
+                  
+                </div>
+            </div>
+            
+        </div>
+        <loading-spinner *ngIf="showSpinner"></loading-spinner>
+</div>

@@ -25,18 +25,21 @@ import { AlertComponent } from './_directives/alert.component';
 import { HomeComponent } from './home/home.component';
 import { NewComponent } from './new/new.component';
 import { ThreadComponent } from './thread/thread.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: MainComponent,
     children : [
-      {path: '', component: HomeComponent, pathMatch: 'full', resolve: { posts : MiscResolve}},
+      {path: '', component: HomeComponent, resolve: { posts : MiscResolve}},
       {path: 'new', component: NewComponent},
       {path: 'thread', component: ThreadComponent},
     ],
   },
+  // {path: '**', component: MainComponent},
 ];
 
 @NgModule({
@@ -50,6 +53,7 @@ const appRoutes: Routes = [
     HomeComponent,
     NewComponent,
     ThreadComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

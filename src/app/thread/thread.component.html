@@ -1,3 +1,23 @@
-<p>
-  thread works!
-</p>
+<div class="timeline-item-content">
+    <div class="timeline-heading" style="padding-bottom: 10px;">
+        
+        <a>{{post.title}}</a>
+        <p>{{post.fulltext}}</p> 
+        
+    </div>                                        
+    <div *ngFor='let comment of post.comments' class="timeline-body comments">
+        <div class="comment-item">
+            
+            <p class="comment-head">
+                <a href="#">{{comment.Username}}</a> <span class="text-muted">@{{comment.Username}}</span>
+            </p>
+            <p>{{comment.Fulltext}}</p>
+            <small class="text-muted">{{comment.DateCreated}}</small>
+        </div>                                            
+                                                   
+        <div class="comment-write">                                                
+            <textarea class="form-control" placeholder="Write a comment" rows="5"></textarea> 
+            <button>Submit</button>                                             
+        </div>
+    </div>
+</div> 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'app/_services';
+import { ChangeDetectorRef, NgZone } from '@angular/core';
+
 
 @Component({
   selector: 'app-main',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  token: string;
+  loggedIn: boolean;
+
+  constructor(public authService: AuthenticationService, public changes: ChangeDetectorRef) {
+     this.token = localStorage.getItem('token');
+     this.loggedIn = false;
+   }
 
   ngOnInit() {
+    if(this.token != null){
+      this.loggedIn = true;
+      this.changes.detectChanges();
+  }
   }
 
 }
