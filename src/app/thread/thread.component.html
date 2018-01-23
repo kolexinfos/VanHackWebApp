@@ -9,15 +9,15 @@
         <div class="comment-item">
             
             <p class="comment-head">
-                <a href="#">{{comment.Username}}</a> <span class="text-muted">@{{comment.Username}}</span>
+                <a href="#">{{comment.Username}}</a> <span *ngIf="isOwner(comment)" class="text-muted">Edit Comment</span>
             </p>
-            <p>{{comment.Fulltext}}</p>
-            <small class="text-muted">{{comment.DateCreated}}</small>
+            <p>{{comment.Fulltext}} </p>
+            <small class="text-muted">{{comment.DateCreated}}  </small>
         </div>                                            
                                                    
-        <div class="comment-write">                                                
-            <textarea class="form-control" placeholder="Write a comment" rows="5"></textarea> 
-            <button>Submit</button>                                             
+        <div *ngIf="loggedIn" class="comment-write">                                                
+            <textarea class="form-control" [(ngModel)]="comment.FullText" placeholder="Write a comment" rows="5"></textarea> 
+            <button (click)="addComment()" class="btn btn-default">Submit</button>                                             
         </div>
     </div>
 </div> 

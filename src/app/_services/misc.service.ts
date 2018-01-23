@@ -7,6 +7,7 @@ import { AppConfig } from '../app.config'
 import { RegisterModel} from '../_models/RegisterModel';
 import { PostModel } from 'app/_models/PostModel';
 import { CategoryModel } from 'app/_models/CategoryModel';
+import { CommentModel } from 'app/_models/CommentModel';
 
 @Injectable()
 export class MiscService {
@@ -55,8 +56,9 @@ export class MiscService {
         })
     }
 
-    AddTopic(topic: PostModel){
-        const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token});
+    AddComment(comment: CommentModel){
+        let token = localStorage.getItem('token');
+        const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'bearer ' + token});
         const options = new RequestOptions({ headers: headers });
 
         let userid = localStorage.getItem('userid');
@@ -64,20 +66,26 @@ export class MiscService {
         let datetime = currentdate.getFullYear() + "-"
                        + (currentdate.getMonth()+1)  + "-"
                        + currentdate.getDate() + ' '
-                    //    + currentdate.getHours() + ":"  
-                    //    + currentdate.getMinutes() + ":" 
-                    //    + currentdate.getSeconds()
-                    //    + '.0000000';
-        
-        // currentdate.getDate() + "-"
-        //         + (currentdate.getMonth()+1)  + "-" 
-        //         + currentdate.getFullYear() + " @ "  
-        //         + currentdate.getHours() + ":"  
-        //         + currentdate.getMinutes() + ":" 
-        //         + currentdate.getSeconds()
-        //         + ' 0000000';
 
-                console.log(datetime);
+        console.log(datetime);
+
+        return this.http.post(this.config.apiUrl + 'api/comments', {fulltext: comment.FullText, userid: userid, 
+        datecreated: datetime, edited: false, topicid: comment.topicid });
+    }
+
+    AddTopic(topic: PostModel){
+
+        let token = localStorage.getItem('token');
+        const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'bearer ' + token});
+        const options = new RequestOptions({ headers: headers });
+
+        let userid = localStorage.getItem('userid');
+        let currentdate =  new Date();
+        let datetime = currentdate.getFullYear() + "-"
+                       + (currentdate.getMonth()+1)  + "-"
+                       + currentdate.getDate() + ' '
+
+        
 
         return this.http.post(this.config.apiUrl + '/api/topics', {fulltext: topic.fulltext, title: topic.title,
             categoryid: topic.categoryid, userid: userid, datecreated: datetime }, options );

@@ -1,8 +1,10 @@
 export class CommentModel {
-    public email: string;
-    public password: string;
+    public FullText: string;
+    public DateCreated: string;
+    public Username: string;
+    public topicid: number;
   
-    constructor(email: string, password: string) {
+    constructor() {
   
     }
   }
